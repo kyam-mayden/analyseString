@@ -7,6 +7,8 @@ $string="<h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendiss
 
 
 class StringAnalyze {
+    public $string;
+
     /**
      * StringAnalyze constructor.
      * @param $string input string
@@ -62,7 +64,7 @@ class StringAnalyze {
      *
      * @return array - all words stripped
      */
-    public function GetWords($string):array {
+    private function GetWords($string):array {
         $string = str_replace(".", " ", $string);
         $string = str_replace(",", " ", $string);
         $string = str_replace("!", " ", $string);
@@ -73,7 +75,7 @@ class StringAnalyze {
     }
 
     /**
-     * Calculates longest word and it's length
+     * Calculates longest word and its length
      *
      * @return string - HTML with longest word and length
      */
