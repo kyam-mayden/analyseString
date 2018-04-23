@@ -7,35 +7,61 @@ $string="<h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendiss
 
 
 class StringAnalyze {
-    function __construct($string)
-    {
+    /**
+     * StringAnalyze constructor.
+     * @param $string input string
+     */
+    function __construct($string) {
         $this->string = $string;
     }
 
-    public function EchoString():string {
-        return $this->string;
-    }
-
+    /**
+     * Calculates characters in $string
+     *
+     * @return string - HTML with character count
+     */
     public function CharacterCount():string {
         $length= strlen($this->string);
         return "<p>characters: $length.</p>";
     }
 
+    /**
+     * Counts amount of words in a string
+     *
+     * @return string - HTML with word count
+     */
     public function WordCount():string {
         $words= str_word_count($this->string);
         return "<p>words: $words.</p>";
     }
 
+    /**
+     * Counts amount of sentences
+     *
+     * @return string - HTML with sentence count
+     */
     public function Sentences():string {
         $sentences = substr_count($this->string, '.');
         return "<p>sentences: $sentences.</p>";
     }
 
+    /**
+     * Counts number of paragraphs using HTML tags as reference
+     *
+     * @return string - HTML with paragraph count
+     */
     public function Paragraphs():string {
         $paragraphs = substr_count($this->string, '</');
         return "<p>There are $paragraphs paragraphs.</p>";
     }
 
+    /**
+     * Strips HTML tags and punctuation from $string
+     *
+     * @param $string input string at constructor
+     *
+     * @return array - all words stripped
+     */
     public function GetWords($string):array {
         $string = str_replace(".", " ", $string);
         $string = str_replace(",", " ", $string);
@@ -46,6 +72,11 @@ class StringAnalyze {
         return $words;
     }
 
+    /**
+     * Calculates longest word and it's length
+     *
+     * @return string - HTML with longest word and length
+     */
     public function LongestWord():string {
         $words = $this->GetWords($this->string);
         $longestWord='';
@@ -56,10 +87,14 @@ class StringAnalyze {
                 $longestLength = strlen($word);
             }
         }
-
         return "<p>Longest word is '$longestWord' at $longestLength characters.</p>";
     }
 
+    /**
+     * Calculates average sentence length
+     *
+     * @return string = HTML with mean, median and mode averages
+     */
     public function AvgSentenceLength():string {
         $array = explode('.', $this->string);
         $lengths = array_map('strlen', $array);
@@ -74,7 +109,7 @@ class StringAnalyze {
 
 $object = new stringAnalyze($string);
 
-echo $object->EchoString();
+echo $object->string;
 echo $object->CharacterCount();
 echo $object->WordCount();
 echo $object->Sentences();
